@@ -8,6 +8,7 @@ import java.util.List;
 
 import rx.Observable;
 import rx.Subscriber;
+import rx.Subscription;
 import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.functions.Func1;
@@ -21,7 +22,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 //        testRxJava2();
-        testRxJava3();
+        //testRxJava3();
+        testRxjava4();
     }
 
     @Override
@@ -84,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
+
         final Action1<String> onNextAction = new Action1<String>() {
             @Override
             public void call(String s) {
@@ -111,5 +114,26 @@ public class MainActivity extends AppCompatActivity {
 
 
         observable.unsubscribeOn(Schedulers.io());
+    }
+
+
+    private void testRxjava4() {
+
+        final Action1<String> onNextAction = new Action1<String>() {
+            @Override
+            public void call(String s) {
+                //相当于Subscriber的onNext(Sring s)
+                Log.d("result","onNextAction->" + s);
+            }
+        };
+
+        Observable.just("Hello, world!")
+                .map(new Func1<String, String>() {
+                    @Override
+                    public String call(String s) {
+                        return s + " -Dan";
+                    }
+                })
+                .subscribe(onNextAction);
     }
 }
