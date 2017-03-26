@@ -84,12 +84,11 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-
         final Action1<String> onNextAction = new Action1<String>() {
             @Override
             public void call(String s) {
                 //相当于Subscriber的onNext(Sring s)
-                Log.d("result","onNextAction");
+                Log.d("result","onNextAction->" + s);
             }
         };
 
