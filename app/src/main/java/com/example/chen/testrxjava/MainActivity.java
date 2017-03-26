@@ -11,6 +11,7 @@ import rx.Subscriber;
 import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,7 +24,11 @@ public class MainActivity extends AppCompatActivity {
         testRxJava3();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
 
+    }
 
     private void testRxJava1() {
         Observable.just("Hello, world!")
@@ -104,5 +109,8 @@ public class MainActivity extends AppCompatActivity {
         observable.subscribe(onNextAction, onErrorAction);
         // 自动创建 Subscriber ，并使用 onNextAction、 onErrorAction 和 onCompletedAction 来定义 onNext()、 onError() 和 onCompleted()
         observable.subscribe(onNextAction, onErrorAction, onCompletedAction);
+
+
+        observable.unsubscribeOn(Schedulers.io());
     }
 }
