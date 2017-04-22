@@ -172,18 +172,22 @@ public class MainActivity extends AppCompatActivity {
 
 
         Flowable.just("map")
-            .map(new Function<String, String>() {
-                @Override
-                public String apply(String s) throws Exception {
-                    return s + " -ittianyu";
-                }
-            })
-            .subscribe(new Consumer<String>() {
-                @Override
-                public void accept(String s) throws Exception {
-                    Log.d(TAG,"->" + s);
-            }
-         });
+                .map(new Function<String, String>() {
+                    @Override
+                    public String apply(String s) throws Exception {
+                        return s + " -ittianyu";
+                    }
+                })
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+                        Log.d(TAG, "->" + s);
+                    }
+
+
+                });
+
+
     }
 
 
@@ -207,23 +211,23 @@ public class MainActivity extends AppCompatActivity {
 //                .subscribe(onNextAction);
 
 
-        ArrayList<String[]> list=new ArrayList<>();
-        String[] words1={"Hello,","I am","China!"};
-        String[] words2={"Hello,","I am","Beijing!"};
+        ArrayList<String[]> list = new ArrayList<>();
+        String[] words1 = {"Hello,", "I am", "China!"};
+        String[] words2 = {"Hello,", "I am", "Beijing!"};
         list.add(words1);
         list.add(words2);
         Flowable.fromIterable(list)
-            .flatMap(new Function<String[], Publisher<String>>() {
-                @Override
-                public Publisher<String> apply(String[] strings) throws Exception {
-                    return Flowable.fromArray(strings);
-                }
-            }).toList()
+                .flatMap(new Function<String[], Publisher<String>>() {
+                    @Override
+                    public Publisher<String> apply(String[] strings) throws Exception {
+                        return Flowable.fromArray(strings);
+                    }
+                }).toList()
                 .subscribe(new Consumer<List<String>>() {
                     @Override
                     public void accept(List<String> strings) throws Exception {
-                        Log.d(TAG,"the size:" + strings.size());
+                        Log.d(TAG, "the size:" + strings.size());
                     }
                 });
-        }
+    }
 }
